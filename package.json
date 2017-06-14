@@ -1,0 +1,47 @@
+{
+  "name": "dahanbank",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suyu0925/dahanbank.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suyu0925/dahanbank/issues"
+  },
+  "homepage": "https://github.com/suyu0925/dahanbank#readme",
+  "devDependencies": {
+    "@types/dotenv": "^4.0.0",
+    "@types/jest": "^19.2.4",
+    "@types/node": "^7.0.31",
+    "@types/request": "0.0.43",
+    "dotenv": "^4.0.0",
+    "jest": "^20.0.4",
+    "moment": "^2.18.1",
+    "ts-jest": "^20.0.6",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/test/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
