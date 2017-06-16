@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build-ts": "tsc -p .",
     "test": "jest"
   },
   "repository": {

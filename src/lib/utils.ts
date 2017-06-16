@@ -21,19 +21,28 @@ export function md5(data: string) {
 }
 
 export function sign(json: { [k: string]: any }, password: string) {
-  const order = [
-    'account',
-    'timestamp',
-    'mobiles',
-    'packageSize',
-    'clientOrderId'
-  ]
   let str = ''
-  for (const key of order) {
-    if (json[key]) {
-      str += json[key]
-      if (key === 'account') {
-        str += md5(password)
+  if (!json.mobiles) {
+    // the sign processing of charge is diffirent
+    str = json.account + md5(password)
+  } else {
+    const order = [
+      'account',
+      'timestamp',
+      'mobiles',
+      'packageSize',
+      'clientOrderId'
+    ]
+    for (const key of order) {
+      if (json[key]) {
+        if (key === 'mobiles' && json[key].length > 32) {
+          str += json[key].toString().substr(0, 32)
+        } else {
+          str += json[key]
+        }
+        if (key === 'account') {
+          str += md5(password)
+        }
       }
     }
   }

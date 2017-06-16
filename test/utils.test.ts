@@ -29,13 +29,15 @@ describe('utils', () => {
       account: 'fcAdmin',
       clientOrderId: '201609211133'
     }
-    expect(utils.sign(json, '123456')).toEqual('3f990fcbfe7cca02d1294aff7e3dd3b3')
+    expect(utils.sign(json, '123456', true)).toEqual('3f990fcbfe7cca02d1294aff7e3dd3b3')
   })
 
   test('sign:changePwd', () => {
     const json = {
-      account: 'fcAdmin'
+      account: 'fcAdmin',
+      newPwd: '123456',
+      sign: null
     }
-    expect(utils.sign(json, '123456')).toEqual('6fe5a74c838dd794e6783d29ba09f0d3')
+    expect(utils.sign(json, '123456', true)).toEqual('6fe5a74c838dd794e6783d29ba09f0d3')
   })
 })

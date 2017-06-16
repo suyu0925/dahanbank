@@ -31,7 +31,7 @@ describe('index', () => {
   test('charge', async () => {
     if (chargeEnable) {
       const result = await dahanBank.charge(
-        '18021070048', 5, moment().format('YYYY-MM-DD') + Math.floor(Math.random() * 1000))
+        '18021070048', 10, moment().format('YYYYMMDDHHmmss') + Math.floor(Math.random() * 1000))
       log('charge result: %j', result)
     } else {
       log('skip charge')
@@ -39,7 +39,7 @@ describe('index', () => {
   })
 
   test('queryOrder', async () => {
-    const outTradeNo = moment().format('YYYY-MM-DD') + Math.floor(Math.random() * 1000)
+    const outTradeNo = moment().format('YYYYMMDDHHmmss') + Math.floor(Math.random() * 1000)
     const result = await dahanBank.queryOrder(outTradeNo)
     log('queryOrder result: %j', result)
   })

@@ -117,7 +117,9 @@ export async function queryBalance(option: IOption) {
 }
 
 export async function orderNew(option: IOption, phone: string, packageSize: number, outTradeNo: string) {
-  // adjust packageSize
+  // check outTradeNo, it's must be all number
+  verifyOutTradeNo(outTradeNo)
+  // adjust packageSize to times of 1000
   if ((packageSize % 1024) === 0) {
     packageSize = Math.floor(packageSize / 1024) * 1000
   }
@@ -130,12 +132,15 @@ export async function orderNew(option: IOption, phone: string, packageSize: numb
     timestamp: Date.now()
   }
   data.sign = utils.sign(data, option.password)
-  data.mobiles = utils.md5(data.mobiles)
+  const md5 = utils.md5(option.password)
+  data.mobiles = utils.encrypt(data.mobiles, md5.substr(0, 16), md5.substr(16, 16))
   const result = (await $post(`${option.baseUrl}/FCOrderNewServlet`, data)) as IOrderNewResponse
   return result
 }
 
 export async function searchReportData(option: IOption, outTradeNo: string) {
+  // check outTradeNo, it's must be all number
+  verifyOutTradeNo(outTradeNo)
   const data = {
     account: option.account,
     clientOrderId: outTradeNo,
@@ -152,4 +157,11 @@ export async function getAttribution(option: IOption, phone: string) {
   }
   const result = (await $get(`${option.baseUrl}/FCGetAttribution`, data)) as IGetAttributionResponse
   return result
+}
+
+export function verifyOutTradeNo(outTradeNo: string) {
+  // check outTradeNo, it's must be all number
+  if (!outTradeNo.match(/^\d+$/)) {
+    throw new Error('wrong outTradeNo format, must be a pure number string')
+  }
 }
