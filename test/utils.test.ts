@@ -2,7 +2,7 @@
 
 import * as utils from '../src/lib/utils'
 
-describe('utils', () => {
+describe.skip('utils', () => {
   test('mobiles', () => {
     const phone = '18621764382'
     const key = 'a906449d5769fa73'
