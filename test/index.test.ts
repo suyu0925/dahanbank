@@ -14,6 +14,7 @@ const option: IOption = {
   password: process.env.password
 }
 const chargeEnable = process.env.charge === 'true'
+const chargePhone = process.env.chargePhone
 
 describe('index', () => {
   let dahanBank: DahanBank
@@ -31,7 +32,7 @@ describe('index', () => {
   test('charge', async () => {
     if (chargeEnable) {
       const result = await dahanBank.charge(
-        '18021070048', 10, moment().format('YYYYMMDDHHmmss') + Math.floor(Math.random() * 1000))
+        chargePhone, 10, moment().format('YYYYMMDDHHmmss') + Math.floor(Math.random() * 1000))
       log('charge result: %j', result)
     } else {
       log('skip charge')
