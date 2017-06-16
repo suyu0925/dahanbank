@@ -11,6 +11,9 @@ export default class DahanBank {
     this.option = option
   }
 
+  /**
+   * @return money, the unit is cent.
+   */
   public async getBalance() {
     return await api.getBalance(this.option)
   }
